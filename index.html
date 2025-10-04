@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juquilita - Lavandería Profesional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #3498db;
+            --secondary: #f39c12;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --text: #333;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e67e22;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary);
+            line-height: 1;
+        }
+        
+        .logo-main {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--primary);
+        }
+        
+        .logo-sub {
+            font-size: 1rem;
+            color: var(--secondary);
+            margin-top: 2px;
+            font-weight: 600;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1582735689369-4fe89db7114c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        /* Servicios */
+        .services {
+            background-color: white;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .service-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .service-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        /* Promociones */
+        .promotions {
+            background-color: var(--light);
+        }
+        
+        .promo-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .promo-table th {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .promo-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .promo-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .promo-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .promo-table tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        .day-highlight {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        /* Precios */
+        .pricing {
+            background-color: white;
+        }
+        
+        .pricing-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .price-card {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .price-card h3 {
+            margin-bottom: 20px;
+            color: var(--dark);
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .price-item:last-child {
+            border-bottom: none;
+        }
+        
+        .price-name {
+            font-weight: 500;
+        }
+        
+        .price-value {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .price-table th, .price-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .price-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .price-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        /* Contacto */
+        .contact {
+            background-color: var(--light);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-icon {
+            margin-right: 15px;
+            color: var(--primary);
+            font-size: 1.2rem;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .contact-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo-main {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: 1px;
+        }
+        
+        .footer-logo-sub {
+            font-size: 1rem;
+            color: var(--secondary);
+            margin-top: 2px;
+            font-weight: 600;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .mobile-menu {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+            
+            nav {
+                display: none;
+                width: 100%;
+                margin-top: 15px;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .promo-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .logo-main {
+                font-size: 1.6rem;
+            }
+            
+            .logo-sub {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-img">
+                    <div class="logo-main">Lavandería</div>
+                    <div class="logo-sub">JUQUILITA</div>
+                </div>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#promociones">Promociones</a></li>
+                    <li><a href="#precios">Precios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <h2>Lavandería Profesional Juquilita</h2>
+            <p>Lavado eficiente, rápido y perfecto gracias a nuestra tecnología avanzada. Tu ropa merece el mejor cuidado.</p>
+            <div class="hero-btns">
+                <a href="#servicios" class="btn">Nuestros Servicios</a>
+                <a href="#contacto" class="btn btn-secondary">Contáctanos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section class="services" id="servicios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Servicios</h2>
+                <p>Ofrecemos una amplia gama de servicios para satisfacer todas tus necesidades de lavandería</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-tshirt service-icon"></i>
+                    <h3>Lavado Especial Blancos</h3>
+                    <p>Tratamiento especial para prendas blancas que requieren cuidado profesional.</p>
+                    <div class="service-price">$50</div>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-iron service-icon"></i>
+                    <h3>Planchado</h3>
+                    <p>Planchado profesional por pieza o por docena.</p>
+                    <div class="service-price">$20 por pieza</div>
+                    <div class="service-price">$200 por docena</div>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-shoe-prints service-icon"></i>
+                    <h3>Limpieza de Tenis</h3>
+                    <p>Limpieza profesional de calzado deportivo.</p>
+                    <div class="service-price">$60 por par</div>
+                    <div class="service-price">3x2 Promoción</div>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-bolt service-icon"></i>
+                    <h3>Lavado Express</h3>
+                    <p>Servicio rápido de lavado en solo 3 horas.</p>
+                    <div class="service-price">$50</div>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-bed service-icon"></i>
+                    <h3>Ropa de Cama</h3>
+                    <p>Lavado especializado para cobijas, colchas y edredones.</p>
+                    <div class="service-price">Desde $150</div>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-truck service-icon"></i>
+                    <h3>Lavado y Entrega</h3>
+                    <p>Lavado por encargo, usted entrega su ropa y nosotros la lavamos.</p>
+                    <div class="service-price">Somos tu mejor opción</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promociones -->
+    <section class="promotions" id="promociones">
+        <div class="container">
+            <div class="section-title">
+                <h2>Promociones de la Semana</h2>
+                <p>Aprovecha nuestras increíbles promociones cada día de la semana</p>
+            </div>
+            <table class="promo-table">
+                <thead>
+                    <tr>
+                        <th>Día</th>
+                        <th>Promoción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="day-highlight">Lunes de Edredones</td>
+                        <td>Lavas 3 edredones y pagas solo 2</td>
+                    </tr>
+                    <tr>
+                        <td class="day-highlight">Martes 5+1</td>
+                        <td>Trae 5 kilos de ropa y el 6to kilo es gratis</td>
+                    </tr>
+                    <tr>
+                        <td class="day-highlight">Miércoles de Carisma</td>
+                        <td>Detergente y suavizante para toda tu ropa con nuestra marca Estrella</td>
+                    </tr>
+                    <tr>
+                        <td class="day-highlight">Jueves de Descuento</td>
+                        <td>$35 el kilo todo el día y si traes más de 10kg 10% de descuento adicional</td>
+                    </tr>
+                    <tr>
+                        <td class="day-highlight">Viernes de Tenis</td>
+                        <td>Limpieza de tenis 3x2 - Trae 2 pares y solo pagas 2</td>
+                    </tr>
+                    <tr>
+                        <td class="day-highlight">Sábado de Planchado</td>
+                        <td>12 piezas por solo $200</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Precios -->
+    <section class="pricing" id="precios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Precios</h2>
+                <p>Precios transparentes y competitivos para todos nuestros servicios</p>
+            </div>
+            <div class="pricing-container">
+                <div class="price-card">
+                    <h3>Servicios Básicos</h3>
+                    <div class="price-item">
+                        <span class="price-name">Lavado especial blancos</span>
+                        <span class="price-value">$50</span>
+                    </div>
+                    <div class="price-item">
+                        <span class="price-name">Planchado por pieza</span>
+                        <span class="price-value">$20</span>
+                    </div>
+                    <div class="price-item">
+                        <span class="price-name">Planchado por docena</span>
+                        <span class="price-value">$200</span>
+                    </div>
+                    <div class="price-item">
+                        <span class="price-name">Limpieza de tenis (par)</span>
+                        <span class="price-value">$60</span>
+                    </div>
+                    <div class="price-item">
+                        <span class="price-name">Lavado express (3 hrs)</span>
+                        <span class="price-value">$50</span>
+                    </div>
+                </div>
+                <div class="price-card">
+                    <h3>Ropa de Cama</h3>
+                    <table class="price-table">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Matrimonial</th>
+                                <th>King Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cobijas</td>
+                                <td>$150</td>
+                                <td>$200</td>
+                            </tr>
+                            <tr>
+                                <td>Colchas</td>
+                                <td>$150</td>
+                                <td>$200</td>
+                            </tr>
+                            <tr>
+                                <td>Edredones</td>
+                                <td>$200</td>
+                                <td>$250</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contáctanos</h2>
+                <p>Estamos aquí para ayudarte. Ponte en contacto con nosotros para cualquier consulta o para programar un servicio.</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Información de Contacto</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt contact-icon"></i>
+                            <div>
+                                <h4>Dirección</h4>
+                                <p><a href="https://maps.app.goo.gl/wVw1F3Zy52bPf1oR8" target="_blank" style="color: var(--primary);">Ver en Google Maps</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone contact-icon"></i>
+                            <div>
+                                <h4>Teléfonos</h4>
+                                <p>951 306 3124</p>
+                                <p>954 524 0173</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock contact-icon"></i>
+                            <div>
+                                <h4>Horario</h4>
+                                <p>Lunes a Sábado: 8:00 - 20:00</p>
+                                <p>Domingo: Cerrado</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope contact-icon"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>josueadanleon187@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61580808980401" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.tiktok.com/@lavanderia.juquilita?_t=ZS-90GNQB57ohh&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm" action="mailto:josueadanleon187@gmail.com" method="post" enctype="text/plain">
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono</label>
+                            <input type="tel" id="phone" name="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Servicio de Interés</label>
+                            <select id="service" name="service" class="form-control">
+                                <option value="">Selecciona un servicio</option>
+                                <option value="lavado">Lavado Especial Blancos</option>
+                                <option value="planchado">Planchado</option>
+                                <option value="tenis">Limpieza de Tenis</option>
+                                <option value="express">Lavado Express</option>
+                                <option value="cama">Ropa de Cama</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" name="message" class="form-control" placeholder="Describe tu solicitud..."></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <div class="footer-logo-main">Lavandería</div>
+                        <div class="footer-logo-sub">JUQUILITA</div>
+                    </div>
+                    <p>Lavado eficiente, rápido y perfecto gracias a nuestra tecnología avanzada.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#promociones">Promociones</a></li>
+                        <li><a href="#precios">Precios</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Servicios</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Lavado Especial Blancos</a></li>
+                        <li><a href="#">Planchado</a></li>
+                        <li><a href="#">Limpieza de Tenis</a></li>
+                        <li><a href="#">Ropa de Cama</a></li>
+                        <li><a href="#">Lavado Express</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone"></i> 951 306 3124</li>
+                        <li><i class="fas fa-phone"></i> 954 524 0173</li>
+                        <li><i class="fas fa-envelope"></i> josueadanleon187@gmail.com</li>
+                        <li><a href="https://maps.app.goo.gl/wVw1F3Zy52bPf1oR8" target="_blank"><i class="fas fa-map-marker-alt"></i> Ver Ubicación</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Lavandería Juquilita. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menú móvil
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.getElementById('main-nav').classList.toggle('active');
+        });
+        
+        // Cerrar menú al hacer clic en un enlace
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('main-nav').classList.remove('active');
+            });
+        });
+        
+        // Formulario de contacto
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
